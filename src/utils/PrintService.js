@@ -9,10 +9,11 @@ const defaultPrinter =
 
 console.log(util.inspect(defaultPrinter), { color: true, depth: 10 });
 
-export const print = async (
+export const sendToPrinter = async (
   {
     path = "",
     printerName = defaultPrinter.name,
+    numberOfCopy = 1,
     options = {
       type: "PDF",
     },
@@ -22,7 +23,7 @@ export const print = async (
 ) => {
   try {
     if (defaultPrinter == null) {
-      throw new Error("ไม่พบเครื่งปริ้นโปรดตรวจสอบอีกครั้ง !");
+      throw new Error("ไม่พบเครื่องปริ้นโปรดตรวจสอบอีกครั้ง !");
     }
     printer.printDirect({
       data: path,
@@ -32,8 +33,10 @@ export const print = async (
       error: errorCallback,
     });
   } catch (error) {
-    throw new Error(error);
+    console.log("ไม่สามารถปริ้นท์ได้");
   }
 };
 
-export default printer;
+const PrintService = printer;
+
+export default PrintService;

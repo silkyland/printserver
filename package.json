@@ -16,9 +16,11 @@
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "install": "^0.13.0",
     "morgan": "^1.10.0",
+    "npm": "^6.14.8",
     "pdfkit": "^0.11.0",
-    "printer": "^0.4.0",
+    "printer": "git+https://github.com/tojocky/node-printer.git",
     "symbology": "^1.18.0"
   },
   "devDependencies": {
