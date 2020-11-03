@@ -1,8 +1,8 @@
-import express from "express";
-import * as config from "./config/index.json";
 import cors from "cors";
+import express from "express";
 import morgan from "morgan";
-import PDFDocument from "pdfkit";
+import config from "./config/index.json";
+import PrintRouter from "./routes/printRoute";
 
 const app = express();
 app.use("*", cors());
@@ -12,6 +12,8 @@ app.use(express.urlencoded({ extended: true }));
 app.get("/", (req, res) => {
   return res.send("hello world");
 });
+
+app.use("/print", PrintRouter);
 
 app.post("/print", async (req, res) => {
   try {

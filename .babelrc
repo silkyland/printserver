@@ -1,3 +1,26 @@
 {
-  "presets": ["@babel/preset-env"]
+  "presets": [
+    "@babel/preset-env",
+    [
+      "minify",
+      {
+        // "mangle": {
+        //   "exclude": ["MyCustomError"]
+        // },
+        // "unsafe": {
+        //   "typeConstructors": false
+        // },
+        "keepFnName": false
+      }
+    ]
+  ],
+  "plugins": [
+    [
+      "@babel/plugin-transform-runtime",
+      {
+        "regenerator": true
+      }
+    ],
+    "@babel/plugin-proposal-class-properties"
+  ]
 }
