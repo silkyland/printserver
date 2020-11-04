@@ -3,6 +3,7 @@ import fs from "fs";
 import util from "util";
 
 const printers = printer.getPrinters();
+console.log(printer.getPrinter());
 
 const defaultPrinter =
   printers.find((printer) => printer.isDefault == true) || null;
@@ -12,7 +13,7 @@ console.log(util.inspect(defaultPrinter), { color: true, depth: 10 });
 export const sendToPrinter = async (
   {
     path = "",
-    printerName = defaultPrinter.name,
+    printerName = "ZDesigner GT800 (EPL)",
     numberOfCopy = 1,
     options = {
       type: "PDF",
@@ -26,8 +27,8 @@ export const sendToPrinter = async (
       throw new Error("ไม่พบเครื่องปริ้นโปรดตรวจสอบอีกครั้ง !");
     }
     printer.printDirect({
-      data: path,
-      printer: printerName,
+      data: "output.pdf",
+      printer: "ZDesigner GT800 (EPL)",
       type: options.type,
       success: successCallback,
       error: errorCallback,
