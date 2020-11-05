@@ -3,16 +3,18 @@ import PDFDocument from "pdfkit";
 import fs from "fs";
 import symbology from "symbology";
 import path from "path";
+import concat from 'concat-stream';
 
 class PrintController extends Controller {
   index = async (req, res, next) => {
     try {
-      await this._generatePDF({
-        name: "Bundit Nuntates",
-        number: "1251200055868",
-        queqe: 1,
-      });
-      await this.sendToPrinter({ path: "output.pdf" });
+      console.log(reg.body);
+      // await this._generatePDF({
+      //   name: "ชลิต โปธา",
+      //   number: "3510300054717",
+      //   queqe: 1,
+      // });
+      console.log(path.join(__dirname, '../../output.pdf'))
       res.json({ message: "Success Print" });
     } catch (error) {
       next(error);
@@ -23,9 +25,9 @@ class PrintController extends Controller {
     try {
       const doc = new PDFDocument({ size: [812, 203], margin: 0 });
       const barcode = await this._renderBarCode(number);
-
+      const writeStream = fs.createWriteStream("output.pdf");
       doc.font(__dirname + "/../fonts/THSarabunNew.ttf");
-      doc.pipe(fs.createWriteStream("output.pdf"));
+      doc.pipe(writeStream);
       doc
         .font(__dirname + "/../fonts/THSarabunNew-Bold.ttf")
         .fontSize(50)
@@ -52,8 +54,10 @@ class PrintController extends Controller {
         470,
         60
       );
-
       doc.end();
+      writeStream.on('finish', async () => {
+        await this.sendToPrinter({ path: path.join(__dirname, '../../output.pdf') });
+      })
     } catch (error) {
       throw new Error(error);
     }
