@@ -8,12 +8,14 @@ import concat from 'concat-stream';
 class PrintController extends Controller {
   index = async (req, res, next) => {
     try {
-      console.log(reg.body);
-      // await this._generatePDF({
-      //   name: "ชลิต โปธา",
-      //   number: "3510300054717",
-      //   queqe: 1,
-      // });
+      console.log(req.body);
+      console.log(req.query);
+      const { name, number, queqe = 1 } = req.query;
+      await this._generatePDF({
+        name,
+        number,
+        queqe,
+      });
       console.log(path.join(__dirname, '../../output.pdf'))
       res.json({ message: "Success Print" });
     } catch (error) {
