@@ -25,40 +25,27 @@ class PrintController extends Controller {
 
   _generatePDF = async ({ name = "", number = "", queqe = 0 }) => {
     try {
-      const doc = new PDFDocument({ size: [812, 203], margin: 0 });
+      const doc = new PDFDocument({ size: [203, 109.5], margin: 0 });
       const barcode = await this._renderBarCode(number);
       const writeStream = fs.createWriteStream("output.pdf");
       doc.font(__dirname + "/../fonts/THSarabunNew.ttf");
       doc.pipe(writeStream);
       doc
         .font(__dirname + "/../fonts/THSarabunNew-Bold.ttf")
-        .fontSize(50)
+        .fontSize(30)
         .text(`คิวที่ ${queqe}`, 10, 10);
-      doc
-        .font(__dirname + "/../fonts/THSarabunNew-Bold.ttf")
-        .fontSize(50)
-        .text(`คิวที่ ${queqe}`, 450, 10);
-      doc.fontSize(25).text(name, 100, 165);
-      doc.fontSize(25).text(name, 550, 165);
+      doc.fontSize(16).text(name, 50, 85);
       doc.image(
         new Buffer.from(
           barcode.replace("data:image/png;base64,", ""),
           "base64"
         ),
-        40,
-        60
-      );
-      doc.image(
-        new Buffer.from(
-          barcode.replace("data:image/png;base64,", ""),
-          "base64"
-        ),
-        470,
-        60
+        15,
+        40, { width: 150 }
       );
       doc.end();
       writeStream.on('finish', async () => {
-        await this.sendToPrinter({ path: path.join(__dirname, '../../output.pdf') });
+        await this.sendToPrinter({ path: path.join(__dirname, '../../output.pdf'), numberOfCopy: 2 });
       })
     } catch (error) {
       throw new Error(error);
@@ -70,8 +57,8 @@ class PrintController extends Controller {
       const image = await symbology.createStream(
         {
           symbology: symbology.Barcode.CODE128,
-          height: 30,
-          scale: 1.3,
+          height: 20,
+          scale: 1,
         },
         barcode
       );

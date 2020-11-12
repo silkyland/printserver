@@ -14,10 +14,10 @@ import util from "util";
 export const sendToPrinter = async (
   {
     path = "",
-    printerName = "ZDesigner GT800 (EPL)",
+    printerName = "Brother QL-820NWB",
     numberOfCopy = 1,
-    width = 800,
-    height = 200,
+    width = 650,
+    height = 300,
     options = {
       type: "PDF",
     },
@@ -30,9 +30,9 @@ export const sendToPrinter = async (
     pdfium.printPDF({
       printerName,
       filePath: path,
-      width: 800,
-      height: 190,
-      dpi: 203,
+      width: width,
+      height: height,
+      dpi: 300,
       copies: numberOfCopy,
     });
   } catch (error) {
