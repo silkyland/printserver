@@ -34,7 +34,7 @@ class PrintController extends Controller {
         .font(__dirname + "/../fonts/THSarabunNew-Bold.ttf")
         .fontSize(30)
         .text(`คิวที่ ${queqe}`, 10, 10);
-      doc.fontSize(16).text(name, 50, 85);
+      doc.fontSize(20).text(name, 50, 80);
       doc.image(
         new Buffer.from(
           barcode.replace("data:image/png;base64,", ""),

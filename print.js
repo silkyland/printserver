@@ -13,7 +13,7 @@ async function printThis() {
         .font(__dirname + "/src/fonts/THSarabunNew-Bold.ttf")
         .fontSize(30)
         .text(`คิวที่ ${1}`, 10, 10);
-    doc.fontSize(16).text("Bundit Nuntates", 50, 85);
+    doc.fontSize(20).text("Bundit Nuntates", 50, 80);
     doc.image(
         new Buffer.from(
             barcode.replace("data:image/png;base64,", ""),
