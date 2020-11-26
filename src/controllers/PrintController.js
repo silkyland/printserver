@@ -45,7 +45,7 @@ class PrintController extends Controller {
       );
       doc.end();
       writeStream.on('finish', async () => {
-        await this.sendToPrinter({ path: path.join(__dirname, '../../output.pdf'), numberOfCopy: 2 });
+        await this.sendToPrinter({ path: path.join(__dirname, '../../output.pdf'), numberOfCopy: 3 });
       })
     } catch (error) {
       throw new Error(error);

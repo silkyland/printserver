@@ -15,7 +15,7 @@ export const sendToPrinter = async (
   {
     path = "",
     printerName = "Brother QL-820NWB",
-    numberOfCopy = 1,
+    numberOfCopy = 3,
     width = 650,
     height = 300,
     options = {
